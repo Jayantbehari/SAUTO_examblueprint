@@ -1,0 +1,1 @@
+# SAUTO_examblueprint
