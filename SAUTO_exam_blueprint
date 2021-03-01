@@ -1,0 +1,155 @@
+SAUTO Exam blueprint notes
+
+1.0 Network Programmability foundation
+
+1.1 Utilize common version control operations with git (add, clone, push, commit, diff, branching, and merging conflict)
+https://app.pluralsight.com/library/courses/getting-started-git/table-of-contents
+
+1.1.0 === Quick setup ===
+https://github.com/wired-brain-coffee/wired-brain-recipes.git
+We recommend every repository include a README, LICENSE, and .gitignore.
+
+
+...or create a new repository on the command line
+
+echo "# wired-brain-recipes" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/wired-brain-coffee/wired-brain-recipes.git
+git push -u origin master
+
+
+...or push an existing repository from the command line
+
+git remote add origin https://github.com/wired-brain-coffee/wired-brain-recipes.git
+git push -u origin master
+
+...or import code from another repository
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+
+
+What is GIT?
+Git is a VCS: Version Control System.
+- This is Soiftware designed to record changes made to files over time.
+- Ability to revert back to a previous file version or project version.
+- Compare changes made to files from one version to another.
+- Version control any plain text file, not just source code.
+
+Version control is the ultimate time travel machine for your project.
+
+UNDERSTANDING HOW GIT MANAGES DATA IS THE MOST IMPORTANT THING TO REMEMBER ABOUT GIT
+
+1.1.1 ==== GIT has three main Stages of a File =====
+
+GIT has three main Stages of a File
+
+1. Committed < data is savely store >
+2. Modified  < data is modified from the previously commited stage, file contents have changed, but has not commited the file >
+3. Staged    < Changes are Marked for Commit, so Marked changes have been added to the commit snapshot >
+
+The Three States of a GIT Project are similar:
+
+1. Working Directory			2. Staging Area (Index)    3. .git directory (Repository)
+      <-------------Checkout a version of the project from origin--------------*
+	  *------Stage fixes for next commit--->
+											*----Commit changes form Index----->
+
+
+Using the command line
+pwd 	= print working directory <just returns your current folder path location>
+cd		= change working directory
+cd~		= change to the home directory
+cd.. 	= change up one level in directory hierarchy
+ls		= list files in a directory (windows dir)
+touch	= create a new empty file (copy con for windows users)
+
+1.1.2 ==== Install Git on Linux ====
+
+Debian: flavors ( Ubuntu )
+sudo apt-get install git
+
+Fedora:
+sudo yum install git
+
+Windows: (has several free options but below install is easy)
+https://git-scm.com/download/win
+this automatically installs the git installer. This installation also installs a command-line tool called Git BASH.
+that will give you a more Linux feel on a Window system to perform the GIT commands.
+
+Mac: Similar to windows but use the below link instead:
+https://git-scm.com/download/mac
+Mac users can also use: homebrew <fee and opensource package manger> 
+brew install git
+
+verify if installation was successful with:
+$ git --version
+git version 2.25.1
+
+Now that we have verified that Git has been installed, the first thing we should do is set up our username and email address:
+
+$ git config --global user.name "jayantbehari"
+$ git config --global user.email "beharij@gmail.com"
+
+If you want to run the same for a specific project, you can do so without the --global option when you are in the project.
+This will overwrite your global settings, but just for this specific project.
+
+if you want to check your configuration settings type:
+git config --list
+
+To check out a specific setting say "name" type:
+
+git config user.name
+
+The gitmanual at your finger tips:
+man git
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+======================== BASH ============================
+
+
+#!/bin/bash
+
+# Simple note-taking script
+
+# get the date
+date=$(date)
+
+# get the topic
+topic="$1"
+
+# filename to write to
+filename="${HOME}/${topic}notes.txt"
+
+# Ask user for input
+read -p "Your note: " note
+
+echo $date: $note >> "$filename"
+echo Note \'$note\' saved to $filename
+
+
+
