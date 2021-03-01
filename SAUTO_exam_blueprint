@@ -194,6 +194,50 @@ Branch 'master' set up to track remote branch 'master' from origin.
 Now this means that everything works!
 
 
+1.1.4 ===Basic commands of Every day Git ===
+
+https://github.com/a-a-ron
+
+in the previous module we instlled GIT with the global and local configurations with the 'git config' command
+We also learned how to use 'man git' and the quick reference help guide 'git help'
+
+High-level porcelain commands:
+git add
+git push
+
+common everyday git commands are:
+git status --short
+git dif --staged
+git diff
+git status
+git add A
+git status -s
+
+type clear command to clean your window
+
+$ clear
+
+you can check the status of your project any time:
+$ git status
+On branch masternothing to commit, working tree clean
+
+A branh in git is a lightweight movable pointer to your project at a specific point in time.
+Since our local and remote repository are in sync with each other, our local master branch is equal to the origin master branch.
+When you initialize your git repository git creates a branch called master. When you make changes in git, you make themn on a specific branch.
+Branches are a core concept in git and a feature that adds a lot of value by allowing many different types of workflows that can involve many
+different types of branches. But at least for right now we'll keep things simple and make all of our changes directly on the master branch.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
