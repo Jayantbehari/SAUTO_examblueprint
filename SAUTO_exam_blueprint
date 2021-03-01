@@ -141,6 +141,59 @@ But as all this is only local at our local desktop computer this project can onl
 To solve this we can host this git repository in an online cloud-like setting.
 
 GITHUB <online GIT repository hosting>
+Using HHTPS URLs to push or pull changes to or from your repository
+
+https://github.com/wired-brain-coffee/wired-brain-recipes.git
+We recommend every repository include a README, LICENSE, and .gitignore.
+
+
+...or create a new repository on the command line
+
+echo "# wired-brain-recipes" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/wired-brain-coffee/wired-brain-recipes.git
+git push -u origin master
+
+
+...or push an existing repository from the command line
+
+git remote add origin https://github.com/wired-brain-coffee/wired-brain-recipes.git
+git push -u origin master
+
+...or import code from another repository
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+
+
+There is also an SSH option on github. (just click it)
+in order to use this SSH secure protocol, you need to first generate an SSH key pair and then add that public key to your GitHub account
+in your profile settings. Using SSH URLs to push or pull changes to or from your repository, GitHub will prompt you with your password and
+you will need to enter in your SSH key passphrase.
+
+more information is available at:
+https://help.github.com/articles/which-remote-url-should-i-use
+
+to stage all files currently in your project folder on your local desktop/laptop type":
+
+git add .
+
+then you could commit your first commit by typing:
+
+git commit -m "first commit"  
+< the -m option means message >
+git then responds back with some interesting information and it can tell us what we just did. We then need to connect our local repository 
+to the one we just created GitHub, by linking the two repositories with a git command. this can be done with the command:
+git remote add origin https://github.com/wired-brain-coffee/wired-brain-recipes.git
+This command adds the origin GitHub repository to our local repository by creating a link that allows us to push and pull changes between the two.
+Now, we need to push our repository that is now pointing to our GitHub repository by typing: 
+git push -u origin master
+
+We are then prompted to type our GitHub username and password. and if verified, Git responds back with some information that at the bottam says,
+Branch 'master' set up to track remote branch 'master' from origin.
+Now this means that everything works!
+
+
 
 
 
