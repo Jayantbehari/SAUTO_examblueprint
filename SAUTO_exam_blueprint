@@ -221,30 +221,242 @@ you can check the status of your project any time:
 $ git status
 On branch masternothing to commit, working tree clean
 
-A branh in git is a lightweight movable pointer to your project at a specific point in time.
+A branch in git is a lightweight movable pointer to your project at a specific point in time.
 Since our local and remote repository are in sync with each other, our local master branch is equal to the origin master branch.
 When you initialize your git repository git creates a branch called master. When you make changes in git, you make themn on a specific branch.
 Branches are a core concept in git and a feature that adds a lot of value by allowing many different types of workflows that can involve many
 different types of branches. But at least for right now we'll keep things simple and make all of our changes directly on the master branch.
 
 
+Each file in our project can be in one of two states: (1) tracked or (2) untracked by git. Remember tracked files were in the previous git snapshot.
+Tracked files can be in one of three states: 
+commited <which are unmodified changes from the last snapshot>
+modified <which are files that we have added changes to>
+staged <which are files that we have marked to be added to our next commit snapshot>
+
+Modified files that have been added are in the stage state. Git has provided us with another message that says use "git reset HEAD"and then file to unstage.
+Resetting or removing files from the staged area is something is something we will cover in the next module. For now we just want to commit this new file.
+We can tell that this file is staged because it is in the: "Changes to be committed:" section
 
 
+Let's create a new file in our repository to keep track of the suppliers
 
+$ touch vendors.txt
 
+If we now run a "git status" commmand we now will see that the vendors.txt file is now under the "Untracked files:
 
+---
 
+$ git status
+On branch master
+Your branch is up to date with órigin/master'.
 
-
-
-
-
-
-
-
-
+Untracked files: 
+	(use "git add <file> ..." to include in what will be committed)
 	
+		vendors.txt
+		
+nothing added to commit but untracked files present (use "git add" to track)
+
+---
+
+Remember that untracked means that git sees a file that does not exist in our last commit snapshot. Now git won't track
+anything unless we explicitly tell it to do so. But git gives us information on how to add this untracked file. The bottom message says:
+nothing added to commit but untracked files present (use "git add" to track). So let's start tracking this file by typing git add vendors.txt
+If we now run git status, we now see that the vendors.txt file is showing as a new file being tracked and that it's a new change waiting to be committed.
+
+
+$ git add vendors.txt
+
+Modified files that have been added are now in our staged state. git has provided us with another message that says use "git reset HEAD <file>..."to unstage)
+---
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+	(use "git reset HEAD <file>..."to unstage)
+		
+		new file: vendors.txt
+
+---
+
+Resetting or removing files from the staged area is something that we're going to cover in the next module. For now, we just want to commit this new file.
+We can tell that this file is staged because it's now under the Changes to be committed section.
+
+
+If we committed this new vendors.txt file now, the contents of this file, when we perform the git add command, will be committed to our project in that sapshot.
+But before committing this file, let's add some changes to a file that was already being tracked. If we type the ls command we see a lis of all files under
+our project directory. we see the vendors.txt file, because we have added it to our local master branch, but we haven't committed it yet.
+
+$ ls
+README.md			employees.txt			mixed_mocho	
+cappucino_cooler	gingerbread_coffee		vendors.txt
+
+
+Let's open up employees.txt, a file that is already being tracked, and add a new employee that was just hired. we can do this by using the command open -a, and 
+then the name of your text editor, the editor in this case is atom, and then the name of the file, employees.txt. Now let's add the new employee and his 
+information to the file. Let's now save that file and go back to our terminal window. if we type git status again we see that the employees.txt file is now 
+under the changes not staged for commit section. 
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+	(use "git reset HEAD <file>..."to unstage)
+		
+		new file: vendors.txt
+
+Changes not staged for commit:
+	(use "git add <file>..." to update what will be committed)
+	(use "git checkout -- <file>..."to discard changes in working directory)
 	
+			modified: 	employees.txt
+
+
+This means that the file is being tracked by git and has been modified in our working directory. 
+But it hasn't yet been added to our staging area for commit. Now we can stage this file by using the git add command. The git add is used to track new files, 
+as well as add modified files to be staged. You can think of the git add command as add this file to be in the next commit snapshot.
+
+So let's type git add employees.txt and add it to the staging area. Let's now run git status again and see what happened.
+
+---
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+	(use "git reset HEAD <file>..."to unstage)
+	
+		modified:	employees.txt
+		new file:	vendors.txt
+
+---
+
+both files are now staged and are showing as changes to be committed. Git provides us with information on what kind of file is being staged next to the file name.
+We can see that the employees.txt file is a modified file, and the vendors.txt file is a new file read to b committed. But before we commit these files, We realize
+that we recorded the new employee's phone number incorrectly.
+
+So let's reopen the employees.txt file and make that change. We can open the file again by typing open -a atom employees.txt and let's make the change.
+After making the change let's save our file again and go back to our terminal window. let's run git status again to see what happened.
+
+---
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+	(use "git reset HEAD <file>..."to unstage)
+	
+		modified:	employees.txt
+		new file:	vendors.txt
+
+Changes not staged for commit:
+	(use "git add <file>..." to update what will be committed)
+	(use "git checkout -- <file>..."to discard changes in working directory)
+	
+			modified: 	employees.txt	
+
+---
+
+Notice that employees.txt is now showing as staged and ready to be committed, as well as showing as modified changes not yet staged.
+Now this may seem a little confusing. I mean, how can a file be in two states at the same time?	Well the answer is how and when git stages a file.
+When we first staged our employees.txt file by using the git add command, thos chages were added at that point in time to be staged. When we fixed the
+the phone number and then resaved the file, git sees this as a new change that was not added when we previously staged that file. If we committed the files in 
+our staged area right now, the version of employees.txt when we added it to the staging area, is what will be committed into the snapshot. 
+This will not include the fix we just made, since we haven't added that change to be included into our next commit snapshot by staging it with the git add command.
+
+If you change a file after you run git add and you want those changes to be included in your next commit snapshot, you have to run "git add" again on that
+file to add those changes, to be staged. So let's run git add employees.txt again and then run git status to see what happened. 
+
+---
+
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+	(use "git reset HEAD <file>..."to unstage)
+	
+		modified:	employees.txt
+		new file:	vendors.txt
+
+---
+
+We now see that the employees.txt file is now only showing in the staged area, which, again are changes to be included in our next commit snapshot.
+
+
+
+1.1.5 === Short Status ===
+
+So far, we have run the git status commands several times already, and each time we run get status, git provides us with pretty comprehensive response.
+but after gettin used to git's response when using git status, it can be useful and nice to have a way to see these changes in a more compact response.
+Git has provided a short status that provides the same amount of information, but in a much smaller and concise way. Now we can see this shortened 
+response by typing "git status -s" or "git status --short". by running this command on our project, we get back a response that has our two files that are 
+waiting to be committed but now with some interesting letters in front of them. 
+
+---
+
+$ git status --short
+M employees.txt
+A vendors.txt
+
+---
+
+Right now I bet you are pretty confused by looking at this response because it doesn't make much sense unless you understand the format	response that the
+short status uses.
+
+
+The key to understanding the short status response is knowing what the letters in front of the files mean and their placement. after running this command, 
+git will place the name of the files in the far right column. There is then a middle column and a far-left column.
+
+example 1.1.5
+<staged>					<  Modified >						<File Name>
+M 																	File 1
+M 									M								File 2
+A																	File 3
+?									?								File 4
+
+
+
+The far-left column indicates tat the file has been staged, and the middle column indicates that the file has been modified but remains in the working 
+directory. The letter M means modified, and the letter A means new files that have been added to the staging area.
+
+M = Modified
+A = New file added to the staging area.
+?? = New file untracked by Git
+
+and two question marks mean that there is a new file that is untracked by git. So in example 1.1.5 File 1 is a modified file in the staging area, 
+File 2 is a modified file in the staging area as well as modified in the working directory. this was the same case with our employees.txt file when 
+we made a change after staging it. file 3 is a new file added to the staging area. And File 4 is a new file created but not yet being tracked.
+
+
+So jumping over to our terminal window again:
+
+---
+
+$ git status --short
+M employees.txt
+A vendors.txt
+
+---
+
+We can see that our employees.txt file is showing modified in the staging area, and our vendors.txt file is a new file that has also been staged.
+the short status is nice if you just want to see which files resides in what states. but what if you want to go th other direction and see more
+information than just what git status shows? Well, git has a command for that too. If the git status command is too vague and you want to see
+the actual changes being made in thes files and not just know which files have been changed,you can use the git diff command. you can use git diff 
+to answer two questions,
+
+1. what changes have I staged that are ready to be committed, and 
+
+2. what changes have I made but not staged?
+
+If we want to see the changes we have staged that will go into our next commit, we can use git diff --staged.
+
 	
 	
 
