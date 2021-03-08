@@ -31,7 +31,7 @@ You can initialize this repository with code from a Subversion, Mercurial, or TF
 
 What is GIT?
 Git is a VCS: Version Control System.
-- This is Soiftware designed to record changes made to files over time.
+- This is Software designed to record changes made to files over time.
 - Ability to revert back to a previous file version or project version.
 - Compare changes made to files from one version to another.
 - Version control any plain text file, not just source code.
@@ -53,7 +53,7 @@ The Three States of a GIT Project are similar:
 1. Working Directory			2. Staging Area (Index)    3. .git directory (Repository)
       <-------------Checkout a version of the project from origin--------------*
 	  *------Stage fixes for next commit--->
-											*----Commit changes form Index----->
+					    *----Commit changes form Index----->
 
 
 Using the command line
@@ -79,7 +79,7 @@ that will give you a more Linux feel on a Window system to perform the GIT comma
 
 Mac: Similar to windows but use the below link instead:
 https://git-scm.com/download/mac
-Mac users can also use: homebrew <fee and opensource package manger> 
+Mac users can also use: homebrew <free and opensource package manger> 
 brew install git
 
 verify if installation was successful with:
@@ -134,14 +134,14 @@ $ cd desktop/cafe_recipes
 $ git init <creates a hidden .git directory. Go to this folder cd .git then ls gives a list of files and folders in the .git directory
 remember that the .git directory contains all the git meta data for the newly created project.
 
-We have now intalled git, initialized git and added files to our git project as a git repository.
-The files are now version controlled by git, arnd are ready to be4 tracked of any changes to be made.
+We have now installed git, initialized git and added files to our git project as a git repository.
+The files are now version controlled by git, and are ready to be tracked of any changes to be made.
 
-But as all this is only local at our local desktop computer this project can only be updated from the local computer
+But as all this is only local at our local desktop computer this project can only be updated from the local computer.
 To solve this we can host this git repository in an online cloud-like setting.
 
 GITHUB <online GIT repository hosting>
-Using HHTPS URLs to push or pull changes to or from your repository
+Using HTTPS URLs to push or pull changes to or from your repository.
 
 https://github.com/wired-brain-coffee/wired-brain-recipes.git
 We recommend every repository include a README, LICENSE, and .gitignore.
@@ -198,7 +198,7 @@ Now this means that everything works!
 
 https://github.com/a-a-ron
 
-in the previous module we instlled GIT with the global and local configurations with the 'git config' command
+in the previous module we installed GIT with the global and local configurations with the 'git config' command
 We also learned how to use 'man git' and the quick reference help guide 'git help'
 
 High-level porcelain commands:
@@ -219,11 +219,11 @@ $ clear
 
 you can check the status of your project any time:
 $ git status
-On branch masternothing to commit, working tree clean
+On branch master nothing to commit, working tree clean
 
 A branch in git is a lightweight movable pointer to your project at a specific point in time.
 Since our local and remote repository are in sync with each other, our local master branch is equal to the origin master branch.
-When you initialize your git repository git creates a branch called master. When you make changes in git, you make themn on a specific branch.
+When you initialize your git repository git creates a branch called master. When you make changes in git, you make them on a specific branch.
 Branches are a core concept in git and a feature that adds a lot of value by allowing many different types of workflows that can involve many
 different types of branches. But at least for right now we'll keep things simple and make all of our changes directly on the master branch.
 
@@ -234,8 +234,8 @@ commited <which are unmodified changes from the last snapshot>
 modified <which are files that we have added changes to>
 staged <which are files that we have marked to be added to our next commit snapshot>
 
-Modified files that have been added are in the stage state. Git has provided us with another message that says use "git reset HEAD"and then file to unstage.
-Resetting or removing files from the staged area is something is something we will cover in the next module. For now we just want to commit this new file.
+Modified files that have been added are in the stage state. Git has provided us with another message that says use "git reset HEAD" and then file to unstage.
+Resetting or removing files from the staged area is something we will cover in the next module. For now we just want to commit this new file.
 We can tell that this file is staged because it is in the: "Changes to be committed:" section
 
 
@@ -292,7 +292,7 @@ our project directory. we see the vendors.txt file, because we have added it to 
 
 $ ls
 README.md			employees.txt			mixed_mocho	
-cappucino_cooler	gingerbread_coffee		vendors.txt
+cappucino_cooler	        gingerbread_coffee		vendors.txt
 
 
 Let's open up employees.txt, a file that is already being tracked, and add a new employee that was just hired. we can do this by using the command open -a, and 
@@ -318,9 +318,9 @@ Changes not staged for commit:
 
 This means that the file is being tracked by git and has been modified in our working directory. 
 But it hasn't yet been added to our staging area for commit. Now we can stage this file by using the git add command. The git add is used to track new files, 
-as well as add modified files to be staged. You can think of the git add command as add this file to be in the next commit snapshot.
+as well as add modified files to be staged. You can think of the "git add" command as add this file to be in the next commit snapshot.
 
-So let's type git add employees.txt and add it to the staging area. Let's now run git status again and see what happened.
+So let's type git add employees.txt and add it to the staging area. Let's now run "git status" again and see what happened.
 
 ---
 
@@ -337,7 +337,7 @@ Changes to be committed:
 ---
 
 both files are now staged and are showing as changes to be committed. Git provides us with information on what kind of file is being staged next to the file name.
-We can see that the employees.txt file is a modified file, and the vendors.txt file is a new file read to b committed. But before we commit these files, We realize
+We can see that the employees.txt file is a modified file, and the vendors.txt file is a new file read to be committed. But before we commit these files, We realize
 that we recorded the new employee's phone number incorrectly.
 
 So let's reopen the employees.txt file and make that change. We can open the file again by typing open -a atom employees.txt and let's make the change.
@@ -365,10 +365,10 @@ Changes not staged for commit:
 
 Notice that employees.txt is now showing as staged and ready to be committed, as well as showing as modified changes not yet staged.
 Now this may seem a little confusing. I mean, how can a file be in two states at the same time?	Well the answer is how and when git stages a file.
-When we first staged our employees.txt file by using the git add command, thos chages were added at that point in time to be staged. When we fixed the
+When we first staged our employees.txt file by using the git add command, those changes were added at that point in time to be staged. When we fixed the
 the phone number and then resaved the file, git sees this as a new change that was not added when we previously staged that file. If we committed the files in 
 our staged area right now, the version of employees.txt when we added it to the staging area, is what will be committed into the snapshot. 
-This will not include the fix we just made, since we haven't added that change to be included into our next commit snapshot by staging it with the git add command.
+This will not include the fix we just made, since we haven't added that change to be included into our next commit snapshot by staging it with the "git add" command.
 
 If you change a file after you run git add and you want those changes to be included in your next commit snapshot, you have to run "git add" again on that
 file to add those changes, to be staged. So let's run git add employees.txt again and then run git status to see what happened. 
@@ -415,11 +415,11 @@ The key to understanding the short status response is knowing what the letters i
 git will place the name of the files in the far right column. There is then a middle column and a far-left column.
 
 example 1.1.5
-<staged>					<  Modified >						<File Name>
-M 																	File 1
-M 									M								File 2
-A																	File 3
-?									?								File 4
+<staged>					<  Modified >					     <File Name>
+M 													File 1
+M 						    M							File 2
+A													File 3
+?						    ?							File 4
 
 
 
@@ -516,11 +516,11 @@ copy to vendors.txt
 
 By running the git diff --staged command we see that the compared a and b versions files is employees.txt next we have the metadata with these file version hashes
 and the file mode identifier, which is the id for a normal file. We then see the change markers for the two file versions of employees.txt with the minus being
-the last committed snapshot version and the plus being the new changes that are in our stage state. We then see the chunk header that shows s the line changes 
-being made in these files,and then we see the chunk changes where we actually see what is being changed. Now, we also see another compared a and b version files,
+the last committed snapshot version and the plus being the new changes that are in our stage state. We then see the chunk header that shows us the line changes 
+being made in these files, and then we see the chunk changes where we actually see what is being changed. Now, we also see another compared a and b version files,
 but unlike the employees.txt file comparison, this file a and file b comparison is with different files. File a is employees.txt and file b is vendors.txt
-Below we see some intersing information that says similarity index 100% ---copy from employees.txt ---copy to vendors.txt. So what is going on here? Well the 
-reason for this is how git thinks about fied changes now, git does not care what the name of the files are. Git reallyonly cares about the content inside of 
+Below we see some interesting information that says similarity index 100% ---copy from employees.txt ---copy to vendors.txt. So what is going on here? Well the 
+reason for this is how git thinks about file changes now, git does not care what the name of the files are. Git really only cares about the content inside of 
 those files.
 
 To go from a change file straight to commit (so in fact skip the staging step) use the command:
