@@ -446,9 +446,9 @@ A vendors.txt
 ---
 
 We can see that our employees.txt file is showing modified in the staging area, and our vendors.txt file is a new file that has also been staged.
-the short status is nice if you just want to see which files resides in what states. but what if you want to go th other direction and see more
+the short status is nice if you just want to see which files resides in what states. but what if you want to go the other direction and see more
 information than just what git status shows? Well, git has a command for that too. If the git status command is too vague and you want to see
-the actual changes being made in thes files and not just know which files have been changed,you can use the git diff command. you can use git diff 
+the actual changes being made in these files and not just know which files have been changed, you can use the "git diff" command. you can use git diff 
 to answer two questions,
 
 1. what changes have I staged that are ready to be committed, and 
@@ -457,8 +457,260 @@ to answer two questions,
 
 If we want to see the changes we have staged that will go into our next commit, we can use git diff --staged.
 
+So let's go over how to read this output.
+
+---
+
+git diff --staged
+
+diff --git a/file1.txt b/file1.txt  <= compared file versions
+
+Index 9863745..f30c839  100644      <= File metadata
+
+--- a/file1.txt						<== Change Markers for File A/B
++++ b/file1.txt
+
+@@ -12. 2 +12, 3 @@					<== Chunk Header
+
+
+Exmple lines...						<== Chunk Changes
+
+- Old content
+
++ New content
+
+---
+
+The first thing we see are the compared file versions. Git diff is comparing file a with file b. In almost every case file a and file b will be the same file, 
+but just in different snapshot versions. This is shown with diff --git and then file a, followed by file b. The next line is the file metadata. Now this is 
+technical information of our files. The first two numbers are the hashes or IDs of the two file versions that are being compared. As we were briefly introduced to
+SHA-1 hashes in a previous module, Git identifies a file object at a specific version by using these SHA-1 hashes. The last number is most likely going to be 100644. 
+Now this is just a internal file mode identifier that represents a normal file. Now there are other number identifiers, but diving into this metadata information is 
+more advanced git knowledge that won't be covered in detail in this course. Again, for now. just know that it's there and the basics of what it is. Next we see the 
+change markers for file a and b. File version a is assigned with the minus symbol, and file version b is assigned with the plus symbol. Next there is the diff chunk,
+which is made up of two parts, the chunk header and the chunk changes. At the top of this chunk is the chunk header, and the header is enclosed with two @ symbols
+on each side and will tell you which lines were changed in the file versions. File a is represented with a minus sign, and file b is represented with a plus sign.
+In this example the -12 is saying that the minus sign, again, being file a, begins at line 12 and then has 2 lines that were modified.  The +12 is saging that the 
+plus sign being file b, also begins at line 12 and has 3 lines that were modified. After the chunk header we have the chunk changes that contain the actual line 
+changes.Now this often includes a few lines of unchanged lines before or after the changes to help provide context of where these changes are being made in the files.
+These changes will either have a minus or a plus sign in front of the change to show you what version that change is occurring in. However, for files with only one 
+or two lines of content these extra lines may not show up. So let's jump over to our terminal window again and run this command to see how it looks in our project.
+
+---
+
+$ git diff --staged
+diff --git a/employees.txt b.employees.txt
+index e69e329..097993b 100644                   < please note that the e69e329 hash is always a hash of an empty file!
+--- a/employees.txt
++++ b/employees.txt
+@@ -0,0 +1 @@
++ Jay Behari | 06196765427
+diff --git a/employees.txt b.vendors.txt
+similarity index 100%
+copy from employees.txt
+copy to vendors.txt
+
+
+
+---
+
+By running the git diff --staged command we see that the compared a and b versions files is employees.txt next we have the metadata with these file version hashes
+and the file mode identifier, which is the id for a normal file. We then see the change markers for the two file versions of employees.txt with the minus being
+the last committed snapshot version and the plus being the new changes that are in our stage state. We then see the chunk header that shows s the line changes 
+being made in these files,and then we see the chunk changes where we actually see what is being changed. Now, we also see another compared a and b version files,
+but unlike the employees.txt file comparison, this file a and file b comparison is with different files. File a is employees.txt and file b is vendors.txt
+Below we see some intersing information that says similarity index 100% ---copy from employees.txt ---copy to vendors.txt. So what is going on here? Well the 
+reason for this is how git thinks about fied changes now, git does not care what the name of the files are. Git reallyonly cares about the content inside of 
+those files.
+
+To go from a change file straight to commit (so in fact skip the staging step) use the command:
+$ git commit -a
+
+
+or if you also want to add the message use:
+
+$ git commit -a -m "add comment here"
+[master 7a1b6ce] add new vendors
+2 files changed, 3 insertions(+)
+create mode 100644 vendors.txt
+
+
+1.1.6 ===  Summary ===
+Check the status of our project
+Track new files and add changes
+Learned git status -s or git status --short
+Complete diff information using git diff
+Commit changes and skip staging area
+
+
+1.1.7 ===  Extended Commands of Everyday Git ===
+
+If you want to push your local repository to github use the command:
+
+$ git push origin master
+
+If you want to see the git history use the command:
+
+$ git log
+
+
+To remove a file completely from a git repository use the command:
+
+$ git rm {type filename here without the brackets}
+
+Check your change with:
+
+$ git status
+
+commit with
+
+$ git commit
+
+
+If you want to remove a file from the tracked repository but you still want to keep the file use the command:
+
+$ git rm --cached {file name}
+
+If you want to change a file name use the git mv command:
+
+$ git mv readme.md readme
+
+The above will change the readme.md command to readme
+
+
+1.1.8 ===  Branches one of the best things about git ===
+
+To see the power of branches in action go to the website
+
+$ gopen http://git-school.github.io/visualization-git
+
+
+to create a new branch
+
+$ git checkoout -b new_branch
+
+running git status gives the branch you are checkout to.
+
+$ git status
+On branch new_branch
+Changes to be committed:
+	(use "git reset HEAD <file>..."to unstage
 	
+		renamed: README.md --> README
+		deleted: eggnog_latte
+		deleted: irish_coffee
+		
+Untracked files:
+	(use "git add <file>..."to include in what will be committed)
 	
+	irish_coffee
+
+Here, we see that git tells us we are on branch new_branch	
+Since these changes are already in our staging area we don't need to add them to be committed by running git add. just commit with dash m to add messages.
+
+$ git commit -m "rename README.md remove eggnog_latte"
+
+
+If you do not want to track a file anymore but you do not want to delete it you have the possibility to stash this file.
+	
+
+$ git add .
+
+$ git stash
+
+So where does this chang go? So if we type:
+
+$ git stash list
+
+git provides us with a list of work in progress changes that we have stashed along with the branch and som commit data
+
+$ git stash list
+stash@{0}: WIP on new_branch: cd50d44 rename README.md remove eggnog_latte
+
+We can also type the below commands for more stash details:
+
+$ git stash show
+	irish_coffee | 1 +
+	1 file changed, 1 insertion(+)
+
+If we want to remove this change from stage we need to run the command:
+
+$ git stash pop
+
+and the change would be dropped back into this working directory.
+
+We can create multiple branches like this:
+
+$ git commit (commit something)
+$ git commit ( commit some more changes)
+$ git checkout -b new_branch (created a new_branch)
+$ git commit (her we commit changes to new_branch)
+$ git checkout master (this points the header back to the master branch)
+$ git commit (this is a new commit on the master branch)
+
+The purpose of branching is to work on code in the newly creating branch without modifying the master branch, this is a bit like sandboxing a server)
+When we think that the code in the newly created branch is stable enough to be merged in the master branch we merge new_branch into the master branch
+
+$ git merge new_branch (note the header still points to the master branch and we are merging new_branch into the master branch)
+
+
+The Three Options of Git Reset:
+
+1. Working Directory			2. Staging Area (Index)    3. .git directory (Repository)
+      <-------------Checkout a version of the project from origin--------------*
+	  *------Stage fixes for next commit--->
+											*----Commit changes form Index----->
+											
+											<------------ git reset --soft-----*
+											
+	 <----------------------------------git reset --mixed ---------------------*
+	 
+	 
+<---------------------------------------git reset hard ------------------------*	(this moves the changes to the thrash bin)
+
+ 
+	 
+	 
+Be carefull with the git reset command. Because you are changing the repository history!!!!!
+
+to push the repository from git --> github
+
+$ git push origin master
+
+
+
+1.1.8  ===  pull from remote origin ===
+
+git clone https:// bla bla
+
+git pull https:// bla bla
+
+
+1.1.9  ===  Summary  ===
+
+git log and git diff --> Check commit history 
+git mv --> remove and move files
+git checkout -b <new_branch> --> create new branch
+git check out <branch_name> checkout to different branches
+git merge branche
+git reset --soft, git reset --mixed, git resert --hard --> reset commits
+clone a repository
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
